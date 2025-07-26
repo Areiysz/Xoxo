@@ -37,6 +37,26 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "fonts": {
+        "logo": {
+          "name": "CALVIN-Bold",
+          "file": "./assets/fonts/CALVIN-Bold.otf"
+        },
+        "title": {
+          "name": "PlayfairDisplay",
+          "file": "./assets/fonts/PlayfairDisplay-Bold.ttf"
+        },
+        "body": {
+          "name": "Lato-Regular",
+          "file": "./assets/fonts/Lato-Regular.ttf"
+        },
+        "italic": {
+          "name": "Lato-Italic",
+          "file": "./assets/fonts/Lato-Italic.ttf"
+        }
+      }
     }
   }
 }
