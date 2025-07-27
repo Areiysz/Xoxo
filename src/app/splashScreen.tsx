@@ -1,41 +1,53 @@
 import { Text, View, StyleSheet } from "react-native";
+import Animated, { FadeInDown } from "react-native-reanimated";
 import { useEffect } from "react";
 import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { color } from "@/constant/theme";
 import { useLoadFonts } from "@/constant/fonts";
 import { SafeAreaView } from "react-native-safe-area-context";
+
 export default function Splashscreen() {
     const router = useRouter();
-    const fontsloaded = useLoadFonts();
+    const fontsLoaded = useLoadFonts();
 
     useEffect(() => {
         const timer = setTimeout(() => {
             router.replace("(route)");
         }, 1500);
+        return () => clearTimeout(timer);
     }, [router]);
-    if (!fontsloaded) {
-        return null;
-    }
+
+    if (!fontsLoaded) return null;
+
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar style="dark" />
             <View style={styles.maincontainer}>
-                <Text style={styles.title}>Xoxo</Text>
+                <Animated.Text
+                    entering={FadeInDown.duration(700).springify()}
+                    style={styles.title}
+                >
+                    Xoxo
+                </Animated.Text>
+            </View>
+            <View style={styles.footer}>
+                <Text style={styles.footerText}>© 2025 Rafi alfiansyah</Text>
             </View>
         </SafeAreaView>
     );
 }
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "center",
+        justifyContent: "space-between",
         alignItems: "center",
-        backgroundColor: color.primary
+        backgroundColor: color.primary,
+        paddingVertical: 40
     },
     maincontainer: {
-        height: 100,
-        width: 200,
+        flex: 1,
         justifyContent: "center",
         alignItems: "center"
     },
@@ -43,6 +55,19 @@ const styles = StyleSheet.create({
         fontSize: 35,
         fontFamily: "logo",
         letterSpacing: 8,
-        color: color.third
+        color: color.secondary,
+        textShadowColor: "rgba(0, 0, 0, 0.3)",
+        textShadowOffset: { width: 2, height: 2 },
+        textShadowRadius: 6
+    },
+    footer: {
+        paddingBottom: 10
+    },
+    footerText: {
+        fontSize: 12,
+        fontWeight: "400",
+        color: color.third,
+        opacity: 0.6,
+        fontFamily: "body"
     }
 });
