@@ -44,7 +44,7 @@ export default function RootLayout() {
                     <Stack.Screen
                         name="search"
                         options={{
-                            title: "Search"
+                            title: "Search",
                         }}
                     />
                     <Stack.Screen

@@ -31,12 +31,19 @@ export const ProductListItem = ({ product }: Props) => {
             <Link asChild href={`/product/${product.slug}`}>
                 <Pressable style={styles.pressable}>
                     <View
-                        style={[styles.imageContainer, { height: imageHeight }]}
+                        style={[
+                            styles.imageContainer,
+                            { height: imageHeight }
+                        ]}
                     >
                         <Image
                             source={product.heroImage}
                             style={styles.image}
                         />
+                        {/* Badge optional */}
+                        <View style={styles.badge}>
+                            <Text style={styles.badgeText}>New</Text>
+                        </View>
                     </View>
                     <View style={styles.info}>
                         <Text style={styles.title} numberOfLines={2}>
@@ -56,38 +63,56 @@ const styles = StyleSheet.create({
     wrapper: {
         width: ITEM_WIDTH,
         backgroundColor: "#fff",
-        borderRadius: 12,
+        borderRadius: 16,
         margin: COLUMN_GAP / 2,
         overflow: "hidden",
-        elevation: 1,
+        elevation: 2,
         shadowColor: "#000",
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 4
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.06,
+        shadowRadius: 8,
     },
     pressable: {
-        flex: 1
+        flex: 1,
     },
     imageContainer: {
-        width: "100%"
+        width: "100%",
+        position: "relative",
+        overflow: "hidden",
+        borderTopLeftRadius: 16,
+        borderTopRightRadius: 16,
     },
     image: {
         width: "100%",
         height: "100%",
-        resizeMode: "cover"
+        resizeMode: "cover",
+    },
+    badge: {
+        position: "absolute",
+        top: 8,
+        left: 8,
+        backgroundColor: color.primary,
+        paddingHorizontal: 6,
+        paddingVertical: 2,
+        borderRadius: 6,
+    },
+    badgeText: {
+        fontSize: 10,
+        color: "#fff",
+        fontFamily: "semiBold",
     },
     info: {
-        padding: 10,
-        gap: 4
+        padding: 12,
+        gap: 6,
     },
     title: {
-        fontSize: 10,
-        fontFamily: "body",
-        color: color.third
+        fontSize: 14,
+        fontFamily: "semiBold",
+        color: "#222",
     },
     price: {
-        fontSize: 8,
+        fontSize: 12,
         fontFamily: "italic",
-        color: color.primary
-    }
+        color: color.primary,
+    },
 });

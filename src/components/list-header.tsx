@@ -1,6 +1,14 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Pressable, Image } from "react-native";
-import Cart  from "@/app/cart";
+import {
+    View,
+    Text,
+    StyleSheet,
+    Pressable,
+    Image,
+    FlatList
+} from "react-native";
+import { CATEGORIES } from "assets/categories";
+import Cart from "@/app/cart";
 import { color } from "@/constant/theme";
 import { Link } from "expo-router";
 import { useLoadFonts } from "@/constant/fonts";
@@ -17,7 +25,6 @@ export const ListHeader = () => {
                 <Text style={styles.logoText}>XOXO</Text>
 
                 <View style={styles.headerIcons}>
-                    {/* ✅ Buka Modal */}
                     <Pressable
                         style={styles.iconWrapper}
                         onPress={() => setCartVisible(true)}
@@ -36,7 +43,6 @@ export const ListHeader = () => {
                             </View>
                         )}
                     </Pressable>
-                    {/* 🔎 Link ke search */}
                     <Link style={styles.iconWrapper} href={"/search"} asChild>
                         <Pressable>
                             {({ pressed }) => (
@@ -52,7 +58,6 @@ export const ListHeader = () => {
                 </View>
             </View>
 
-            {/* 🖼️ Hero/Banner */}
             <View style={styles.heroContainer}>
                 <Image
                     source={require("assets/images/hero.png")}
@@ -60,8 +65,31 @@ export const ListHeader = () => {
                 />
             </View>
 
-            {/* 📂 Kategori */}
-            <View style={styles.cetegoriesContainer}></View>
+            <View style={styles.cetegoriesContainer}>
+                <FlatList
+                    data={CATEGORIES}
+                    renderItem={({ item }) => (
+                        <Link href={`/categories/${item.slug}`} asChild>
+                            <Pressable style={styles.category}>
+                                <Image
+                                    source={{ uri: item.imageUrl }}
+                                    style={styles.categoryImage}
+                                />
+                                <Text style={styles.categoriestitle}>
+                                    {item.name}
+                                </Text>
+                            </Pressable>
+                        </Link>
+                    )}
+                    keyExtractor={item => item.name}
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    ItemSeparatorComponent={() => (
+                        <View style={styles.separator} />
+                    )}
+                    contentContainerStyle={styles.categoriesContent}
+                />
+            </View>
             <Cart
                 isVisible={isCartVisible}
                 onClose={() => setCartVisible(false)}
@@ -72,14 +100,14 @@ export const ListHeader = () => {
 
 const styles = StyleSheet.create({
     headerContainer: {
-        gap: 20,
         paddingHorizontal: 10,
         paddingTop: 16
     },
     headerTop: {
         flexDirection: "row",
         justifyContent: "space-between",
-        alignItems: "center"
+        alignItems: "center",
+        marginBottom: 20
     },
     logoText: {
         fontSize: 24,
@@ -110,9 +138,15 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
     cetegoriesContainer: {
-        height: 50,
-        backgroundColor: "#eee",
-        borderRadius: 10
+        height: 100,
+        borderRadius: 30,
+        marginVertical: 20
+    },
+    categoriesContent: {
+        paddingHorizontal: 5
+    },
+    separator: {
+        width: 15
     },
     badgeContainer: {
         position: "absolute",
@@ -122,12 +156,29 @@ const styles = StyleSheet.create({
         alignItems: "center",
         height: 15,
         width: 15,
-        borderRadius: 50, // ganti dari string jadi number
+        borderRadius: 50,
         backgroundColor: color.primary
     },
     Itemcount: {
         fontSize: 10,
         fontFamily: "italic",
         color: color.secondary
+    },
+    category: {
+        width: 80,
+        height: 100,
+        alignItems: "center",
+        justifyContent: "center",
+        borderRadius: 20
+    },
+    categoryImage: {
+        width: 60,
+        height: 60,
+        borderRadius: 30
+    },
+    categoriestitle: {
+        fontSize: 15,
+        fontFamily: "italic",
+        marginTop: 3
     }
 });

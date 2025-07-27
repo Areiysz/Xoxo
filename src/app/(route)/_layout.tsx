@@ -59,20 +59,6 @@ export default function Layout() {
                     }}
                 />
                 <Tabs.Screen
-                    name="search"
-                    options={{
-                        title: "Explore",
-                        tabBarIcon: ({ color, focused }) => (
-                            <TabsBarIcon
-                                focused={focused}
-                                active="compass"
-                                inactive="search"
-                                color={color}
-                            />
-                        )
-                    }}
-                />
-                <Tabs.Screen
                     name="orders"
                     options={{
                         title: "Transaction",
