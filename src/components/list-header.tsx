@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, Pressable, Image } from "react-native";
+import Cart  from "@/app/cart";
 import { color } from "@/constant/theme";
 import { Link } from "expo-router";
 import { useLoadFonts } from "@/constant/fonts";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 export const ListHeader = () => {
+    const [isCartVisible, setCartVisible] = useState(false);
     const fontsLoaded = useLoadFonts();
     if (!fontsLoaded) return null;
 
@@ -34,7 +36,6 @@ export const ListHeader = () => {
                             </View>
                         )}
                     </Pressable>
-
                     {/* 🔎 Link ke search */}
                     <Link style={styles.iconWrapper} href={"/search"} asChild>
                         <Pressable>
@@ -61,6 +62,10 @@ export const ListHeader = () => {
 
             {/* 📂 Kategori */}
             <View style={styles.cetegoriesContainer}></View>
+            <Cart
+                isVisible={isCartVisible}
+                onClose={() => setCartVisible(false)}
+            />
         </View>
     );
 };
