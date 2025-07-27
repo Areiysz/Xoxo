@@ -42,6 +42,12 @@ export default function RootLayout() {
                         }}
                     />
                     <Stack.Screen
+                        name="search"
+                        options={{
+                            title: "Search"
+                        }}
+                    />
+                    <Stack.Screen
                         name="cart"
                         options={{
                             title: "Cart"

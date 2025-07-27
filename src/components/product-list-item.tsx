@@ -28,7 +28,7 @@ export const ProductListItem = ({ product }: Props) => {
 
     return (
         <View style={styles.wrapper}>
-            <Link asChild href={`/products/${product.slug}`}>
+            <Link asChild href={`/product/${product.slug}`}>
                 <Pressable style={styles.pressable}>
                     <View
                         style={[styles.imageContainer, { height: imageHeight }]}
@@ -81,12 +81,12 @@ const styles = StyleSheet.create({
         gap: 4
     },
     title: {
-        fontSize: 15,
+        fontSize: 10,
         fontFamily: "body",
         color: color.third
     },
     price: {
-        fontSize: 14,
+        fontSize: 8,
         fontFamily: "italic",
         color: color.primary
     }
