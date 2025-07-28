@@ -20,6 +20,13 @@ type Props = {
     product: Product;
 };
 
+const formatRupiah = (value: number) =>
+    new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR",
+        minimumFractionDigits: 0,
+    }).format(value);
+
 export const ProductListItem = ({ product }: Props) => {
     const fontsLoaded = useLoadFonts();
     if (!fontsLoaded) return null;
@@ -42,7 +49,7 @@ export const ProductListItem = ({ product }: Props) => {
                         />
                         {/* Badge optional */}
                         <View style={styles.badge}>
-                            <Text style={styles.badgeText}>New</Text>
+                            <Text style={styles.badgeText}>Baru</Text>
                         </View>
                     </View>
                     <View style={styles.info}>
@@ -50,7 +57,7 @@ export const ProductListItem = ({ product }: Props) => {
                             {product.title}
                         </Text>
                         <Text style={styles.price}>
-                            ${product.price.toFixed(2)}
+                            {formatRupiah(product.price)}
                         </Text>
                     </View>
                 </Pressable>

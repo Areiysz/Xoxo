@@ -10,11 +10,12 @@ import {
 import { CATEGORIES } from "assets/categories";
 import Cart from "@/app/cart";
 import { color } from "@/constant/theme";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import { useLoadFonts } from "@/constant/fonts";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 export const ListHeader = () => {
+    const router = useRouter();
     const [isCartVisible, setCartVisible] = useState(false);
     const fontsLoaded = useLoadFonts();
     if (!fontsLoaded) return null;
@@ -43,18 +44,19 @@ export const ListHeader = () => {
                             </View>
                         )}
                     </Pressable>
-                    <Link style={styles.iconWrapper} href={"/search"} asChild>
-                        <Pressable>
-                            {({ pressed }) => (
-                                <Ionicons
-                                    name="search"
-                                    size={22}
-                                    color="black"
-                                    style={{ opacity: pressed ? 0.5 : 1 }}
-                                />
-                            )}
-                        </Pressable>
-                    </Link>
+                    <Pressable
+                        style={styles.iconWrapper}
+                        onPress={() => router.push("/search")}
+                    >
+                        {({ pressed }) => (
+                            <Ionicons
+                                name="search"
+                                size={22}
+                                color="black"
+                                style={{ opacity: pressed ? 0.5 : 1 }}
+                            />
+                        )}
+                    </Pressable>
                 </View>
             </View>
 
@@ -69,17 +71,18 @@ export const ListHeader = () => {
                 <FlatList
                     data={CATEGORIES}
                     renderItem={({ item }) => (
-                        <Link href={`/categories/${item.slug}`} asChild>
-                            <Pressable style={styles.category}>
-                                <Image
-                                    source={{ uri: item.imageUrl }}
-                                    style={styles.categoryImage}
-                                />
-                                <Text style={styles.categoriestitle}>
-                                    {item.name}
-                                </Text>
-                            </Pressable>
-                        </Link>
+                        <Pressable
+                            style={styles.category}
+                            onPress={() => router.push(`/categories/${item.slug}`)}
+                        >
+                            <Image
+                                source={{ uri: item.imageUrl }}
+                                style={styles.categoryImage}
+                            />
+                            <Text style={styles.categoriestitle}>
+                                {item.name}
+                            </Text>
+                        </Pressable>
                     )}
                     keyExtractor={item => item.name}
                     horizontal

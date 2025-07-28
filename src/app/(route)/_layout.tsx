@@ -38,7 +38,7 @@ export default function Layout() {
                         textTransform: "capitalize"
                     },
                     tabBarStyle: {
-                        height: 100,
+                        height: 90,
                         paddingTop: 14,
                         paddingBottom: 8
                     }
