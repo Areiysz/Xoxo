@@ -11,10 +11,10 @@ export const PRODUCTS: Product[] = [
       require('../assets/images/mac-book-2.jpg'),
       require('../assets/images/mac-book-3.jpg'),
     ],
-    price: 899.99,
+    price: 13999999, // Rp13.999.999
     category: {
       imageUrl: require('../assets/images/mac-book-1.jpg'),
-      name: 'Laptops',
+      name: 'Laptop',
       slug: 'laptops',
     },
     maxQuantity: 5,
@@ -28,10 +28,10 @@ export const PRODUCTS: Product[] = [
       require('../assets/images/dell-1.jpg'),
       require('../assets/images/dell-2.jpg'),
     ],
-    price: 1099.99,
+    price: 16999999, // Rp16.999.999
     category: {
       imageUrl: require('../assets/images/mac-book-1.jpg'),
-      name: 'Laptops',
+      name: 'Laptop',
       slug: 'laptops',
     },
     maxQuantity: 7,
@@ -45,10 +45,10 @@ export const PRODUCTS: Product[] = [
       require('../assets/images/i-phone-2.jpg'),
       require('../assets/images/i-phone-3.jpg'),
     ],
-    price: 999.99,
+    price: 15999999, // Rp15.999.999
     category: {
       imageUrl: require('../assets/images/i-phone-1.jpg'),
-      name: 'Phones',
+      name: 'Ponsel',
       slug: 'phones',
     },
     maxQuantity: 10,
@@ -62,10 +62,10 @@ export const PRODUCTS: Product[] = [
       require('../assets/images/samsung-1.jpg'),
       require('../assets/images/samsung-2.jpg'),
     ],
-    price: 799.99,
+    price: 12499999, // Rp12.499.999
     category: {
       imageUrl: require('../assets/images/i-phone-1.jpg'),
-      name: 'Phones',
+      name: 'Ponsel',
       slug: 'phones',
     },
     maxQuantity: 12,
@@ -79,10 +79,10 @@ export const PRODUCTS: Product[] = [
       require('../assets/images/head-set-1.jpg'),
       require('../assets/images/head-set-2.jpg'),
     ],
-    price: 499.99,
+    price: 799999, // Rp799.999
     category: {
       imageUrl: require('../assets/images/head-set-1.jpg'),
-      name: 'Accessories',
+      name: 'Aksesori',
       slug: 'accessories',
     },
     maxQuantity: 15,
@@ -97,10 +97,10 @@ export const PRODUCTS: Product[] = [
       require('../assets/images/ps-5-2.jpg'),
       require('../assets/images/ps-5-3.jpg'),
     ],
-    price: 699.99,
+    price: 10499999, // Rp10.499.999
     category: {
       imageUrl: require('../assets/images/ps-5-1.jpg'),
-      name: 'Gaming',
+      name: 'Permainan',
       slug: 'gaming',
     },
     maxQuantity: 3,
@@ -114,10 +114,10 @@ export const PRODUCTS: Product[] = [
       require('../assets/images/nintendo-switch-1.jpg'),
       require('../assets/images/nintendo-switch-2.jpg'),
     ],
-    price: 299.99,
+    price: 4799999, // Rp4.799.999
     category: {
       imageUrl: require('../assets/images/ps-5-1.jpg'),
-      name: 'Gaming',
+      name: 'Permainan',
       slug: 'gaming',
     },
     maxQuantity: 8,

@@ -25,12 +25,17 @@ const Categories = () => {
     const category = CATEGORIES.find(category => category.slug === slug);
     if (!category) {
         router.push("/404");
+        return null;
     }
 
     const products = PRODUCTS.filter(product => product.category.slug === slug);
     return (
         <SafeAreaView style={styles.container}>
-            <View>
+            <View
+                style={{
+                    flex: 1
+                }}
+            >
                 <View style={styles.NavWrapper}>
                     <View style={styles.arrowIcon}>
                         <Pressable onPress={() => router.back()}>
@@ -70,23 +75,17 @@ const Categories = () => {
                         </Pressable>
                     </View>
                 </View>
-                <View
-                    style={{
-                        flex: 1
-                    }}
-                >
-                    <MasonryFlashList
-                        data={products}
-                        numColumns={2}
-                        estimatedItemSize={300}
-                        keyExtractor={item => item.id.toString()}
-                        renderItem={({ item }) => (
-                            <ProductListItem product={item} />
-                        )}
-                        contentContainerStyle={styles.content}
-                        showsVerticalScrollIndicator={false}
-                    />
-                </View>
+                <MasonryFlashList
+                    data={products}
+                    numColumns={2}
+                    estimatedItemSize={300}
+                    keyExtractor={item => item.id.toString()}
+                    renderItem={({ item }) => (
+                        <ProductListItem product={item} />
+                    )}
+                    contentContainerStyle={styles.content}
+                    showsVerticalScrollIndicator={false}
+                />
                 <Cart
                     isVisible={isCartVisible}
                     onClose={() => setCartVisible(false)}
@@ -98,14 +97,15 @@ const Categories = () => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        marginVertical: 5,
-        marginHorizontal: 20
+        flex: 1
     },
     NavWrapper: {
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        marginBottom: 20,
+        marginTop: 5,
+        marginHorizontal: 10
     },
     badgeContainer: {
         position: "absolute",
@@ -149,12 +149,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         borderColor: "#ccc"
-    },
-    productsList: {
-        flexGrow: 1
-    },
-    productRow: {
-        justifyContent: "space-between"
     },
     content: {
         paddingHorizontal: 10,

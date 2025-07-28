@@ -73,7 +73,9 @@ export const ListHeader = () => {
                     renderItem={({ item }) => (
                         <Pressable
                             style={styles.category}
-                            onPress={() => router.push(`/categories/${item.slug}`)}
+                            onPress={() =>
+                                router.push(`/categories/${item.slug}`)
+                            }
                         >
                             <Image
                                 source={{ uri: item.imageUrl }}
@@ -146,7 +148,7 @@ const styles = StyleSheet.create({
         marginVertical: 20
     },
     categoriesContent: {
-        paddingHorizontal: 5
+        paddingHorizontal: 5,
     },
     separator: {
         width: 15

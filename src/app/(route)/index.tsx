@@ -32,11 +32,5 @@ const styles = StyleSheet.create({
     content: {
         paddingHorizontal: 10,
         paddingBottom: 20
-    },
-    header: {
-        fontSize: 22,
-        fontFamily: "body",
-        color: "#111",
-        paddingVertical: 14
     }
 });
