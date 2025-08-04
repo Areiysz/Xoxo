@@ -8,6 +8,7 @@ import {
     FlatList
 } from "react-native";
 import { useLocalSearchParams, useRouter, Stack } from "expo-router";
+import { useCartStore } from "@/store/cart-store";
 import { MasonryFlashList } from "@shopify/flash-list";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ProductListItem } from "@/components/product-list-item";
@@ -18,6 +19,7 @@ import { PRODUCTS } from "assets/products";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 const Categories = () => {
+    const { getItemCount } = useCartStore();
     const router = useRouter();
     const [isCartVisible, setCartVisible] = useState(false);
     const { slug } = useLocalSearchParams<{ slug: string }>();
@@ -43,7 +45,7 @@ const Categories = () => {
                                 <Ionicons
                                     name="arrow-back-outline"
                                     size={22}
-                                    color={color.third}
+                                    color={color.primary}
                                     style={{
                                         opacity: pressed ? 0.5 : 1
                                     }}
@@ -64,11 +66,13 @@ const Categories = () => {
                                     <Ionicons
                                         name="bag-handle-outline"
                                         size={22}
-                                        color={color.third}
+                                        color={color.primary}
                                         style={{ opacity: pressed ? 0.5 : 1 }}
                                     />
                                     <View style={styles.badgeContainer}>
-                                        <Text style={styles.Itemcount}>1</Text>
+                                        <Text style={styles.Itemcount}>
+                                            {getItemCount()}
+                                        </Text>
                                     </View>
                                 </View>
                             )}

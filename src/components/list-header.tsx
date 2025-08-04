@@ -8,6 +8,7 @@ import {
     FlatList
 } from "react-native";
 import { CATEGORIES } from "assets/categories";
+import {useCartStore} from "@/store/cart-store";
 import Cart from "@/app/cart";
 import { color } from "@/constant/theme";
 import { Link, useRouter } from "expo-router";
@@ -15,6 +16,7 @@ import { useLoadFonts } from "@/constant/fonts";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 export const ListHeader = () => {
+    const { getItemCount } = useCartStore();
     const router = useRouter();
     const [isCartVisible, setCartVisible] = useState(false);
     const fontsLoaded = useLoadFonts();
@@ -39,7 +41,9 @@ export const ListHeader = () => {
                                     style={{ opacity: pressed ? 0.5 : 1 }}
                                 />
                                 <View style={styles.badgeContainer}>
-                                    <Text style={styles.Itemcount}>1</Text>
+                                    <Text style={styles.Itemcount}>
+                                        {getItemCount()}
+                                    </Text>
                                 </View>
                             </View>
                         )}
@@ -148,7 +152,7 @@ const styles = StyleSheet.create({
         marginVertical: 20
     },
     categoriesContent: {
-        paddingHorizontal: 5,
+        paddingHorizontal: 5
     },
     separator: {
         width: 15

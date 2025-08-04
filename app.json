@@ -46,7 +46,7 @@
         },
         "title": {
           "name": "PlayfairDisplay",
-          "file": "./assets/fonts/PlayfairDisplay-Bold.ttf"
+          "file": "./assets/fonts/Inter-SemiBold.otf"
         },
         "body": {
           "name": "Lato-Regular",

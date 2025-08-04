@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     footerText: {
         fontSize: 12,
         fontWeight: "400",
-        color: color.third,
+        color: color.secondary,
         opacity: 0.6,
         fontFamily: "body"
     }
