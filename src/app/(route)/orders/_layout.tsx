@@ -7,6 +7,12 @@ export default function RootLayout() {
               headerShown:false,
               title:"Transaction"
             }}/>
+                        <Stack.Screen
+                name="[slug]"
+                options={{
+                    headerShown: false
+                }}
+            />
         </Stack>
     );
 }

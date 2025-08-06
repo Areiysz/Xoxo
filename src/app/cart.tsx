@@ -1,14 +1,13 @@
-import { useState } from "react";
 import Modal from "react-native-modal";
 import { useCartStore } from "@/store/cart-store";
 import {
     View,
     Text,
     StyleSheet,
-    Pressable,
     FlatList,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
+    Pressable
 } from "react-native";
 import { color } from "@/constant/theme";
 import { useLoadFonts } from "@/constant/fonts";
@@ -42,38 +41,36 @@ const CartItem = ({
     onRemove,
     onIncrement,
     onDecrement
-}: CartItemProps) => {
-    return (
-        <View style={styles.CartItem}>
-            <Image source={item.image} style={styles.itemImage} />
-            <View style={styles.itemDetails}>
-                <Text style={styles.itemTitle}>{item.title}</Text>
-                <Text style={styles.itemPrice}>{formatRupiah(item.price)}</Text>
-                <View style={styles.quantityContainer}>
-                    <TouchableOpacity
-                        onPress={() => onDecrement(item.id)}
-                        style={styles.quantityButton}
-                    >
-                        <Text style={styles.quantityButtonText}>-</Text>
-                    </TouchableOpacity>
-                    <Text style={styles.itemQuantity}>{item.quantity}</Text>
-                    <TouchableOpacity
-                        onPress={() => onIncrement(item.id)}
-                        style={styles.quantityButton}
-                    >
-                        <Text style={styles.quantityButtonText}>+</Text>
-                    </TouchableOpacity>
-                </View>
+}: CartItemProps) => (
+    <View style={styles.CartItem}>
+        <Image source={item.image} style={styles.itemImage} />
+        <View style={styles.itemDetails}>
+            <Text style={styles.itemTitle}>{item.title}</Text>
+            <Text style={styles.itemPrice}>{formatRupiah(item.price)}</Text>
+            <View style={styles.quantityContainer}>
+                <TouchableOpacity
+                    onPress={() => onDecrement(item.id)}
+                    style={styles.quantityButton}
+                >
+                    <Text style={styles.quantityButtonText}>-</Text>
+                </TouchableOpacity>
+                <Text style={styles.itemQuantity}>{item.quantity}</Text>
+                <TouchableOpacity
+                    onPress={() => onIncrement(item.id)}
+                    style={styles.quantityButton}
+                >
+                    <Text style={styles.quantityButtonText}>+</Text>
+                </TouchableOpacity>
             </View>
-            <TouchableOpacity
-                onPress={() => onRemove(item.id)}
-                style={styles.removeButton}
-            >
-                <Text style={styles.removeButtonText}>Remove</Text>
-            </TouchableOpacity>
         </View>
-    );
-};
+        <TouchableOpacity
+            onPress={() => onRemove(item.id)}
+            style={styles.removeButton}
+        >
+            <Text style={styles.removeButtonText}>Remove</Text>
+        </TouchableOpacity>
+    </View>
+);
 
 export default function Cart({
     isVisible,
@@ -83,14 +80,8 @@ export default function Cart({
     onClose: () => void;
 }) {
     const fontsLoaded = useLoadFonts();
-    const [showCheckoutAlert, setShowCheckoutAlert] = useState(false);
     const { items, removeItem, incrementItem, decrementItem, getTotalPrice } =
         useCartStore();
-
-    const handleCheckout = () => {
-        setShowCheckoutAlert(true);
-    };
-
     if (!fontsLoaded) return null;
 
     return (
@@ -104,8 +95,6 @@ export default function Cart({
             <View style={styles.content}>
                 <View style={styles.mainContainer}>
                     <StatusBar style="dark" />
-
-                    {/* Navbar */}
                     <View style={styles.navbar}>
                         <View style={styles.navbarIndicator} />
                         <Text style={styles.navbarTitle}>Your Cart</Text>
@@ -135,44 +124,6 @@ export default function Cart({
                         showsVerticalScrollIndicator={false}
                     />
 
-                    {/* Alert */}
-                    {showCheckoutAlert && (
-                        <View style={styles.alertOverlay}>
-                            <View style={styles.alertContainer}>
-                                <Text style={styles.alertTitle}>
-                                    💸 Checkout time!
-                                </Text>
-                                <Text style={styles.alertMessage}>
-                                    You’ll pay {formatRupiah(getTotalPrice())}.
-                                    {"\n"}Ready to roll?
-                                </Text>
-                                <View style={styles.alertButtons}>
-                                    <Pressable
-                                        style={styles.alertCancel}
-                                        onPress={() =>
-                                            setShowCheckoutAlert(false)
-                                        }
-                                    >
-                                        <Text style={styles.cancelText}>
-                                            Not yet
-                                        </Text>
-                                    </Pressable>
-                                    <Pressable
-                                        style={styles.alertConfirm}
-                                        onPress={() =>
-                                            setShowCheckoutAlert(false)
-                                        }
-                                    >
-                                        <Text style={styles.confirmText}>
-                                            Let’s go!
-                                        </Text>
-                                    </Pressable>
-                                </View>
-                            </View>
-                        </View>
-                    )}
-
-                    {/* Footer */}
                     <View style={styles.footer}>
                         <View style={styles.priceWraper}>
                             <Text style={styles.totalText}>Your total:</Text>
@@ -182,7 +133,7 @@ export default function Cart({
                         </View>
                         <Pressable
                             style={styles.checkoutButton}
-                            onPress={handleCheckout}
+                            onPress={() => {}}
                         >
                             <Text style={styles.checkoutText}>
                                 Pay now - {formatRupiah(getTotalPrice())}
@@ -211,8 +162,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#fdfdfd",
         paddingHorizontal: 20,
-        paddingTop: 10,
-        paddingBottom: 100 // agar tidak ketutup footer
+        paddingTop: 10
     },
     navbar: {
         paddingTop: 12,
@@ -240,8 +190,6 @@ const styles = StyleSheet.create({
         top: 10,
         padding: 8
     },
-
-    // --- CART ITEM STYLE ---
     CartItem: {
         flexDirection: "row",
         alignItems: "center",
@@ -313,8 +261,6 @@ const styles = StyleSheet.create({
         fontSize: 12,
         fontWeight: "600"
     },
-
-    // --- FOOTER STYLE ---
     footer: {
         position: "absolute",
         left: 0,
@@ -358,69 +304,6 @@ const styles = StyleSheet.create({
     checkoutText: {
         color: "#fff",
         fontSize: 16,
-        fontWeight: "600"
-    },
-
-    // --- ALERT STYLE ---
-    alertOverlay: {
-        position: "absolute",
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        backgroundColor: "rgba(0,0,0,0.4)",
-        justifyContent: "center",
-        alignItems: "center",
-        zIndex: 999
-    },
-    alertContainer: {
-        width: "85%",
-        backgroundColor: "#ffffff",
-        borderRadius: 30,
-        padding: 28,
-        shadowColor: "#000",
-        shadowOffset: { width: 0, height: 6 },
-        shadowOpacity: 0.1,
-        shadowRadius: 12,
-        elevation: 10
-    },
-    alertTitle: {
-        fontSize: 22,
-        fontWeight: "700",
-        marginBottom: 12,
-        textAlign: "center"
-    },
-    alertMessage: {
-        fontSize: 16,
-        color: "#666",
-        textAlign: "center",
-        marginBottom: 24
-    },
-    alertButtons: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        gap: 10
-    },
-    alertCancel: {
-        flex: 1,
-        backgroundColor: "#eee",
-        paddingVertical: 12,
-        borderRadius: 25,
-        alignItems: "center"
-    },
-    cancelText: {
-        color: "#555",
-        fontWeight: "500"
-    },
-    alertConfirm: {
-        flex: 1,
-        backgroundColor: "#000",
-        paddingVertical: 12,
-        borderRadius: 25,
-        alignItems: "center"
-    },
-    confirmText: {
-        color: "#fff",
         fontWeight: "600"
     }
 });
